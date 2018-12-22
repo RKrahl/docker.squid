@@ -1,8 +1,8 @@
-FROM rkrahl/opensuse:42.3
+FROM rkrahl/opensuse:15.0
 
 RUN zypper --non-interactive install \
 	squid && \
-    sed -i -e 's/^\#\(cache_dir aufs .*\)/\1/' /etc/squid/squid.conf && \
+    sed -i -e 's/^\#\(cache_dir ufs .*\)/\1/' /etc/squid/squid.conf && \
     /usr/sbin/squid -z -F -N -S -f /etc/squid/squid.conf
 
 CMD ["/usr/sbin/squid",  "-F",  "-sY", "/etc/squid/squid.conf"]
